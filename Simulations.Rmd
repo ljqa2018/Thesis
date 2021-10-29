@@ -15,7 +15,7 @@ LFunky<- function(beta0,beta1,beta2,n_obs,n_data,n_shuffle) {
   
   #If there is no intercept in the fitted regression, d.o.f. = (n-1)
   #otherwise, df=n-k-1; k=the number of variables
-  dof <- n-1
+  dof <- n_obs-1
   
   #addp_val<-c()
 
@@ -30,11 +30,11 @@ LFunky<- function(beta0,beta1,beta2,n_obs,n_data,n_shuffle) {
 
   for(i in 1:n_data) {               # Start of the Monte Carlo loop
 
-  x1<- rnorm(n)     # Artificial x series, created just once
+  x1<- rnorm(n_obs)     # Artificial x series, created just once
 
-  x2<- x1+ rnorm(n)     ## Did we figure out why these need to be defined in the loop?
+  x2<- x1+ rnorm(n_obs)     ## Did we figure out why these need to be defined in the loop?
 
-  y<- beta0 + beta1*x1 + beta2*x2 + rnorm(n)   # The DGP includes an intercept
+  y<- beta0 + beta1*x1 + beta2*x2 + rnorm(n_obs)   # The DGP includes an intercept
   
   simpfit<- lm(y ~ x1  -1)
   
