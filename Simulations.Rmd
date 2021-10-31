@@ -180,8 +180,13 @@ $Y_i=\beta_1*x_1$
 ```{r}
 #beta0,beta1,beta2,n_obs,n_data,n_shuffle
 results<-LFunky(0,50,0,15,100,200)
+```
+
+```{r}
 hist(results$simpp_val)
 hist(results$perm_pval)
+mean(results$simpp_val < 0.05)
+mean(results$perm_pval < 0.05)
 ```
 What happened? I introduced a highly correlated slope, and my simple linear model was very good at recognizing the lack of correlation. But, it seems my permuted data failed *because* my simple linear model was so good. With a p-value of nearly zero in almost all of my 100 data sets, there was almost *never* a chance for the permuted values to be greater than my observed value? I'm not sure, but my p-values can't be negative. Is there some change that needs to be made in the function to avoid this?
 
